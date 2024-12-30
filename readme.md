@@ -30,7 +30,7 @@ Installation
 
 Clone the repository:
 
-git clone <repository_url>
+git clone https://github.com/falola0021/assiessment.git
 
 Navigate to the project directory:
 
