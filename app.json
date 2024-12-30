@@ -7,27 +7,21 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-     "plugins": [
-  [
-    "@rnmapbox/maps",
-    {
-      "RNMapboxMapsDownloadToken": "sk.ey.."
-    }
-  ]
-],
-    "splash": {
+ "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.dayo.trackingApp"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.dayo.trackingApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"

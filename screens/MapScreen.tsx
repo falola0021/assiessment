@@ -2,8 +2,6 @@ import React from 'react';
 import tw from 'tailwind-react-native-classnames';
 import {
   View,
-  StatusBar,
-  StyleSheet,
   SafeAreaView,
   SafeAreaViewBase,
   TouchableOpacity,
@@ -18,7 +16,6 @@ const MapScreen = () => {
   const Stack = createNativeStackNavigator();
   const navigation = useNavigation();
   return (
-    // <SafeAreaView style={styles.container}>
 
     <SafeAreaView>
       <TouchableOpacity
@@ -29,6 +26,7 @@ const MapScreen = () => {
       <View style={tw`h-1/2`}>
         <Map />
       </View>
+
       <View style={tw`h-1/2`}>
         <Stack.Navigator>
           <Stack.Screen
@@ -36,21 +34,13 @@ const MapScreen = () => {
             component={NavigationCard}
             options={{ headerShown: false }}
           />
-          <Stack.Screen
-            name='RideOptionCard'
-            component={RideOptionCard}
-            options={{ headerShown: false }}
-          />
+          <Stack.Screen name='RideOptionCard' component={RideOptionCard} options={{ headerShown: false }} />
+
         </Stack.Navigator>
       </View>
     </SafeAreaView>
   );
 };
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     marginTop: StatusBar.currentHeight
-//   }
-// })
+
 
 export default MapScreen;

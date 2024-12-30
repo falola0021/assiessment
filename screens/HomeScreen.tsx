@@ -55,10 +55,9 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={[tw`bg-white h-full`, [Style.AndroidSafeArea]]}>
       <View style={tw`p-5`}>
-        <Image
-          style={Style.logo}
-          source={{ uri: 'https://links.papareact.com/gzs' }}
-        />
+        <Text style={{ fontSize: 30, fontWeight: 'bold', marginBottom: 40 }}>
+          RIDEE-CHEKK
+        </Text>
         <View>
           <TextInput
             placeholder="Where From?"

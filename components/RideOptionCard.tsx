@@ -12,37 +12,61 @@ import {
 import { Icon } from 'react-native-elements/dist/icons/Icon';
 import tw from 'tailwind-react-native-classnames';
 import { useNavigation } from '@react-navigation/native';
-import { useSelector } from 'react-redux';
-import { selectTravelTimeInformation } from '../slices/navSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectTravelTimeInformation,
+  setCarLocation,
+  selectOrigin,
+  selectDestination,
+} from '../slices/navSlice';
 import 'intl';
 import 'intl/locale-data/jsonp/en'; // or any other locale you need
 const data = [
   {
     id: '11',
-    title: 'UberX',
+    title: 'Sienna',
     image: 'https://links.papareact.com/3pn',
     multiplier: '1',
+    numberOfSeatLeft: '4',
+    location: { latitude: 6.5355, longitude: 3.3087 }
   },
   {
     id: '164',
-    title: 'Uber XL',
+    title: 'BRT',
     image: 'https://links.papareact.com/5w8',
     multiplier: '1.2',
+    numberOfSeatLeft: '10',
+    location: { latitude: 6.611409, longitude: 3.369721 }
   },
   {
     id: '828278',
-    title: 'Uber Lux',
+    title: 'Shuttle',
     image: 'https://links.papareact.com/7pf',
     multiplier: '1.75',
-  },
-];
+    numberOfSeatLeft: '1',
+    location: { latitude: 6.605874, longitude: 3.349149 }
+  }
+]
+
 
 const SURGE_CHARGE_RATE = 1.5;
 
 const RideOption = () => {
   const [selected, setSelected] = useState(null);
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const travelTimeInformation = useSelector(selectTravelTimeInformation);
+
+  const handleSelectCar = (item) => {
+    setSelected(item)
+    setTimeout(() => {
+      dispatch(setCarLocation(item));
+    }, 300);
+
+  };
+
+
+
   return (
     <SafeAreaView style={[tw`bg-white flex-grow`, styles.container]}>
       <View>
@@ -52,7 +76,7 @@ const RideOption = () => {
           <Icon name='chevron-left' type='fontawesome' />
         </TouchableOpacity>
         <Text style={tw`text-center py-5 text-xl`}>
-          Select a Rid - {travelTimeInformation?.distance?.text}
+          Available Options - {travelTimeInformation?.distance}
         </Text>
       </View>
       <FlatList
@@ -60,10 +84,9 @@ const RideOption = () => {
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <TouchableOpacity
-            style={tw`flex-row justify-between items-center px-5 ${
-              item.id === selected?.id && 'bg-gray-200'
-            } `}
-            onPress={() => setSelected(item)}>
+            style={tw`flex-row justify-between items-center px-5 ${item.id === selected?.id && 'bg-gray-200'
+              } `}
+            onPress={() => handleSelectCar(item)}>
             {/* <View style={tw`${!origin && 'opacity-20 '}`}> */}
             <Image
               style={{
@@ -76,7 +99,7 @@ const RideOption = () => {
             <View style={tw`-ml-6`}>
               <Text style={tw`text-lg font-semibold`}>{item.title}</Text>
               <Text style={{ fontSize: 10 }}>
-                {travelTimeInformation?.duration?.text}
+                {travelTimeInformation?.duration}
                 Travel Time
               </Text>
             </View>
@@ -85,10 +108,10 @@ const RideOption = () => {
                 style: 'currency',
                 currency: 'NGN',
               }).format(
-                (travelTimeInformation?.duration?.value *
+                (travelTimeInformation?.duration *
                   SURGE_CHARGE_RATE *
                   item.multiplier) /
-                  100
+                100
               )}
             </Text>
           </TouchableOpacity>
@@ -99,7 +122,7 @@ const RideOption = () => {
           disabled={!selected}
           style={tw`bg-black py-3 m-3 ${!selected && 'bg-gray-300'}`}>
           <Text style={tw`text-center text-white text-xl`}>
-            Choose {selected?.title}
+            Book a seat
           </Text>
         </TouchableOpacity>
       </View>

@@ -90,17 +90,17 @@ const NavigationCard = () => {
           onPress={() => navigation.navigate('RideOptionCard')}
           style={tw`justify-between flex flex-row bg-black w-24 rounded-full py-3 px-4`}>
           <Icon name="car" type="font-awesome" color="white" size={16} />
-          <Text style={tw`text-white text-center`}>Rides</Text>
+          <Text style={tw`text-white text-center`}>Bus</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={tw`flex flex-row justify-between rounded-full py-3 px-4 w-24`}>
           <Icon
-            name="fast-food-outline"
+            name="bus"
             type="ionicon"
             color="black"
             size={16}
           />
-          <Text style={tw`text-black text-center`}>Eats</Text>
+          <Text style={tw`text-black text-center`}>Train</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
